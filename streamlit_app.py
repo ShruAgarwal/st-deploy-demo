@@ -1,0 +1,64 @@
+import streamlit as st
+import numpy as np
+import altair as alt
+import pandas as pd
+
+
+st.title('**st.write() : the Magic method!**')
+st.write('displays text, numbers, DataFrames, plots and much more! 🤯')
+
+dropdown = st.selectbox(
+     'Select any one method for the effect', 
+     ('1. Markdown-formatted text and Numbers',
+     '2. Dataframes and  Multiple arguments', 
+     '3. Chart objects', 
+     '4. st.markdown() and st.caption()', 
+     '5. st.latex() 🤓', 
+     '6. st.code() : Embed any code block!'))
+
+
+
+if dropdown == '1. Markdown-formatted text and Numbers':
+     st.write('Hello from *Streamlit!* :sunglasses:')
+     st.write(1234)
+
+
+df = pd.DataFrame({
+     'second column': [1, 2, 3, 4],
+     'third column': [10, 20, 30, 40]
+     })
+if dropdown == '2. Dataframes and  Multiple arguments':
+     st.write(df)
+     st.write('Below is a DataFrame:', df, 'Above is a dataframe.')
+
+
+if dropdown == '3. Chart objects':
+     df2 = pd.DataFrame(
+     np.random.randn(200, 3),
+     columns=['a', 'b', 'c'])
+     c = alt.Chart(df2).mark_circle().encode(
+     x='a', y='b', size='c', color='c', tooltip=['a', 'b', 'c'])
+     st.write(c)
+
+
+if dropdown == '4. st.markdown() and st.caption()':
+     st.markdown('Streamlit is **_really_ cool!**.')
+     st.caption('This is a  caption string that explains something above.')
+
+if dropdown == '5. st.latex() 🤓':
+     st.latex(r'''
+     a + ar + a r^2 + a r^3 + \cdots + a r^{n-1} =
+     \sum_{k=0}^{n-1} ar^k =
+     a \left(\frac{1-r^{n}}{1-r}\right)
+     ''')
+
+
+
+if dropdown == '6. st.code() : Embed any code block!':
+     code = '''
+     <script>
+     // using console.log
+     console.log('Hello from JavaScript!');
+     </script>
+     '''
+     st.code(code, language='javascript')
